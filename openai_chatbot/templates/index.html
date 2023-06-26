@@ -10,12 +10,12 @@
     <div class="bg-gray-300 mx-auto flex items-center justify-center h-20">
         <h3 class="text-2xl font-serif font-extrabold text-black">Chat Page</h3>
    </div>
-   <div id="message-body" class="flex flex-col items-start p-4 h-[80vh] overflow">
-      {% for message in result %}
+   <div id="message-body" class="flex flex-row items-start p-4 h-[80vh] overflow">
+      {% comment %} {% for message in messages %} {% endcomment %}
       <div class="p-2 rounded-lg bg-gray-300 shadow-sm text-black w-3/4 self-start">
-        {{ message }}
+        {{ ai_response }}
       </div>
-      {% endfor %}
+      {% comment %} {% endfor %} {% endcomment %}
    </div>
    <div id="input" class="my-4 mx-auto container flex">
     <input id="message-input" type="text" placeholder="Type here..." class="border-none p-2 w-full bg-gray-100 text-gray-800 focus:outline-none" onkeydown="handleKeyDown(event)"/>
@@ -25,14 +25,14 @@
 
    <script>
     function sendMessage() {;
-       const messageInput = document.getElementById("message-input");
-       const messageText = messageInput.value;
+       const messageInput = document.getElementById("message-input").value;
+       //const messageText = messageInput.value;
        if (messageText.trim() !== "") {
           const messageBody = document.createElement("div");
           messageBody.classList.add("bg-gray-400", "rounded-lg", "p-2", "mb-2", "w-3/4","self-end");
           const messageContent = document.createElement("p");
           messageContent.classList.add("text-white");
-          messageContent.textContent = messageText;
+          messageContent.textContent = messageInput;
           messageBody.appendChild(messageContent);
           const messageContainer = document.getElementById("message-body");
           messageContainer.appendChild(messageBody);
@@ -46,7 +46,7 @@
               "X-CSRFToken": "{{ csrf_token }}",
             },
             body: new URLSearchParams({
-              "message-input": messageText,
+              "message-input": messageInput,
             }).toString(),
           })
             .then(response => response.text())

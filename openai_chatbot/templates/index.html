@@ -4,25 +4,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Chat App</title>
 </head>
-<body class="h-[100vh] bg-gray-200">
+<body class="h-[100vh] bg-gray-200 w-[800px] mx-auto items-center justify-center container">
    <div class="bg-gray-300 mx-auto flex items-center justify-center h-20">
         <h3 class="text-2xl font-serif font-extrabold text-black">Chat Page</h3>
    </div>
-   <div id="message-body" class="flex flex-col items-start p-4">
-        <div class="bg-white rounded-lg p-2 mb-2 max-w-xs">
-            <p class="text-gray-800">Receiver Message 1</p>
-        </div>
-        <div class="bg-white rounded-lg p-2 mb-2 max-w-xs">
-            <p class="text-gray-800">Receiver Message 2</p>
-        </div>
-        <div class="bg-gray-200 rounded-lg p-2 mb-2 max-w-xs self-end">
-            <p class="text-gray-800">Sender Message 1</p>
-        </div>
-        <div class="bg-gray-200 rounded-lg p-2 mb-2 max-w-xs self-end">
-            <p class="text-gray-800">Sender Message 2</p>
-        </div>
+   <div id="message-body" class="flex flex-col items-start p-4 h-[80vh] overflow">
+      
    </div>
-   <div id="input" class="my-4 mx-auto max-w-lg flex">
+   <div id="input" class="my-4 mx-auto mb-0 flex container">
         <input id="message-input" type="text" placeholder="Type here..." class="border-none p-2 w-full bg-gray-100 text-gray-800 focus:outline-none"/>
         <button onclick="sendMessage()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 ml-2 rounded-md">Send</button>
    </div>
@@ -33,9 +22,9 @@
          const messageText = messageInput.value;
          if (messageText.trim() !== "") {
             const messageBody = document.createElement("div");
-            messageBody.classList.add("bg-gray-400", "rounded-lg","p-2", "mb-2", "max-w-xs", "self-end");
+            messageBody.classList.add("bg-gray-400", "rounded-lg","p-2", "mb-2", "w-3/4","overflow", "self-end");
             const messageContent = document.createElement("p");
-            messageContent.classList.add("text-black");
+            messageContent.classList.add("text-white");
             messageContent.textContent = messageText;
             messageBody.appendChild(messageContent);
             const messageContainer = document.getElementById("message-body");

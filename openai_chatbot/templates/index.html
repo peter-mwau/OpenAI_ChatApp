@@ -11,27 +11,33 @@
    <div id="message-body" class="flex flex-col items-start p-4 h-[80vh] overflow">
       
    </div>
-   <div id="input" class="my-4 mx-auto mb-0 flex container">
-        <input id="message-input" type="text" placeholder="Type here..." class="border-none p-2 w-full bg-gray-100 text-gray-800 focus:outline-none"/>
-        <button onclick="sendMessage()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 ml-2 rounded-md">Send</button>
-   </div>
+   <div id="input" class="my-4 mx-auto container flex">
+    <input id="message-input" type="text" placeholder="Type here..." class="border-none p-2 w-full bg-gray-100 text-gray-800 focus:outline-none" onkeydown="handleKeyDown(event)"/>
+    <button onclick="sendMessage()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 ml-2 rounded-md">Send</button>
+    </div>
 
    <script>
-      function sendMessage() {
-         const messageInput = document.getElementById("message-input");
-         const messageText = messageInput.value;
-         if (messageText.trim() !== "") {
-            const messageBody = document.createElement("div");
-            messageBody.classList.add("bg-gray-400", "rounded-lg","p-2", "mb-2", "w-3/4","overflow", "self-end");
-            const messageContent = document.createElement("p");
-            messageContent.classList.add("text-white");
-            messageContent.textContent = messageText;
-            messageBody.appendChild(messageContent);
-            const messageContainer = document.getElementById("message-body");
-            messageContainer.appendChild(messageBody);
-            messageInput.value = "";
-         }
-      }
-   </script>
+    function sendMessage() {
+       const messageInput = document.getElementById("message-input");
+       const messageText = messageInput.value;
+       if (messageText.trim() !== "") {
+          const messageBody = document.createElement("div");
+          messageBody.classList.add("bg-gray-400", "rounded-lg", "p-2", "mb-2", "w-3/4","self-end");
+          const messageContent = document.createElement("p");
+          messageContent.classList.add("text-white");
+          messageContent.textContent = messageText;
+          messageBody.appendChild(messageContent);
+          const messageContainer = document.getElementById("message-body");
+          messageContainer.appendChild(messageBody);
+          messageInput.value = "";
+       }
+    }
+    
+    function handleKeyDown(event) {
+       if (event.keyCode === 13) { // Enter key
+          sendMessage();
+       }
+    }
+ </script>
 </body>
 </html>
